@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "535702436617",
+    "project_id": "pizza-website-1c6ab",
+    "storage_bucket": "pizza-website-1c6ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535702436617:android:bd7136c2321bc6a6ad31d8",
+        "android_client_info": {
+          "package_name": "lizzie_pizza.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535702436617-l3gj7b1aom39ju44vpu7lj0h11o46b17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEUhvj6ieOXLFQMAw-E0DMfYX93W2xJWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535702436617-l3gj7b1aom39ju44vpu7lj0h11o46b17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
