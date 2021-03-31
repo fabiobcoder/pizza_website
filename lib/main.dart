@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components/pizza order/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +17,19 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
+  }
+}
+
+class TextStyles {
+  static TextStyle h1(BuildContext context) {
+    return TextStyle(
+        color: Theme.of(context).accentColor,
+        fontWeight: FontWeight.bold,
+        fontSize: 40);
+  }
+
+  static TextStyle actionButton(BuildContext context) {
+    return TextStyle(fontSize: 20);
   }
 }
 
@@ -45,64 +59,69 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              padding: EdgeInsets.all(8),
-              constraints: BoxConstraints(maxWidth: 350),
-              child: Column(children: [
-                Text("TEIGNMOUTH, DEVON"),
-                GradientContainer(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("fresh pizza from oven to door",
-                            style: TextStyle(
-                                color: Theme.of(context).accentColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 40)),
-                        ElevatedButton(
-                            child: Text("order",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15)),
-                            onPressed: () => {})
-                      ]),
-                ),
-                Text(
-                    "Fresh pizza and bread just order form teignmoth and get italian oven-cooked pizza in under 30 minutes")
-              ]),
-            ),
-            Image.network(
-                'https://media.giphy.com/media/65LrvAMGU650TvPgs5/giphy.gif?raw=true')
-          ]),
+      body: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Center(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            constraints: BoxConstraints(maxWidth: 350),
+            child: Column(children: [
+              Text("TEIGNMOUTH, DEVON"),
+              GradientContainer(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("fresh pizza from oven to door",
+                          style: TextStyles.h1(context)),
+                      ElevatedButton(
+                          child: Text("order",
+                              style: TextStyles.actionButton(context)),
+                          onPressed: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) => OrderDialog()))
+                    ]),
+              ),
+              Text(
+                  "Fresh pizza and bread just order form teignmoth and get italian oven-cooked pizza in under 30 minutes")
+            ]),
+          ),
+        ),
+        Image.network(
+            'https://media.giphy.com/media/65LrvAMGU650TvPgs5/giphy.gif?raw=true')
+      ]),
     );
   }
 }
 
 class GradientContainer extends StatelessWidget {
-  final Widget child;
+  final child;
 
-  GradientContainer({Key key, @required this.child}) : super(key: key);
+  GradientContainer({@required this.child});
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(4),
-        child: Container(
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [
-                  0.0,
-                  1.1
-                ],
-                    colors: [
-                  Colors.white.withOpacity(0.0),
-                  Colors.grey[700].withOpacity(0.8)
-                ])),
-            child: child));
+    return Stack(children: [
+      Positioned(
+          left: 5,
+          top: 17,
+          bottom: 5,
+          right: 9,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [
+                    0.0,
+                    1.1
+                  ],
+                      colors: [
+                    Colors.white.withOpacity(0.0),
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+                  ])),
+            ),
+          )),
+      child,
+    ]);
   }
 }
