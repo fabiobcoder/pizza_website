@@ -25,7 +25,8 @@ class TextStyles {
     return TextStyle(
         color: Theme.of(context).accentColor,
         fontWeight: FontWeight.bold,
-        fontSize: 40);
+        fontSize: 40,
+        height: 0.8);
   }
 
   static TextStyle actionButton(BuildContext context) {
@@ -59,35 +60,45 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Center(
+      body: Center(
+        child: SafeArea(
           child: Container(
-            padding: EdgeInsets.all(8),
-            constraints: BoxConstraints(maxWidth: 350),
-            child: Column(children: [
-              Text("TEIGNMOUTH, DEVON"),
-              GradientContainer(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text("fresh pizza from oven to door",
-                          style: TextStyles.h1(context)),
-                      ElevatedButton(
-                          child: Text("order",
-                              style: TextStyles.actionButton(context)),
-                          onPressed: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) => OrderDialog()))
-                    ]),
-              ),
-              Text(
-                  "Fresh pizza and bread just order form teignmoth and get italian oven-cooked pizza in under 30 minutes")
-            ]),
+            constraints: BoxConstraints(maxWidth: 1500),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Center(
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      constraints: BoxConstraints(maxWidth: 350),
+                      child: Column(children: [
+                        Text("Teignmouth, Devon"),
+                        GradientContainer(
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                              Text("fresh pizza from oven to door",
+                                  style: TextStyles.h1(context)),
+                              ElevatedButton(
+                                  child: Text("order",
+                                      style: TextStyles.actionButton(context)),
+                                  onPressed: () => openOrderDialog(context))
+                            ])),
+                        Text(
+                            "Fresh pizza and bread just order form teignmoth and get italian oven-cooked pizza in under 30 minutes")
+                      ]),
+                    ),
+                  ),
+                  Expanded(
+                      child: FittedBox(
+                    child: Image.network(
+                        'https://media.giphy.com/media/65LrvAMGU650TvPgs5/giphy.gif?raw=true'),
+                    fit: BoxFit.cover,
+                  ))
+                ]),
           ),
         ),
-        Image.network(
-            'https://media.giphy.com/media/65LrvAMGU650TvPgs5/giphy.gif?raw=true')
-      ]),
+      ),
     );
   }
 }
@@ -113,10 +124,10 @@ class GradientContainer extends StatelessWidget {
                       end: Alignment.bottomRight,
                       stops: [
                     0.0,
-                    1.1
+                    1.0
                   ],
                       colors: [
-                    Colors.white.withOpacity(0.0),
+                    Colors.black.withOpacity(0.0),
                     Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
                   ])),
             ),
