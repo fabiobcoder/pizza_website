@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'components/pizza order/widgets.dart';
+import 'components/dialogs/order.dart';
+import 'components/utils/gradientContainer.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,10 +25,11 @@ class MyApp extends StatelessWidget {
 class TextStyles {
   static TextStyle h1(BuildContext context) {
     return TextStyle(
-        color: Theme.of(context).accentColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 40,
-        height: 0.8);
+      color: Theme.of(context).accentColor,
+      fontWeight: FontWeight.bold,
+      fontSize: 40,
+      height: 0.8,
+    );
   }
 
   static TextStyle actionButton(BuildContext context) {
@@ -91,8 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                       child: FittedBox(
-                    child: Image.network(
-                        'https://media.giphy.com/media/65LrvAMGU650TvPgs5/giphy.gif?raw=true'),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Y6Y-5Sx4WvIElp7b2iMHFwHaEK%26pid%3DApi&f=1',
+                    ),
                     fit: BoxFit.cover,
                   ))
                 ]),
@@ -100,39 +105,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-  }
-}
-
-class GradientContainer extends StatelessWidget {
-  final child;
-
-  GradientContainer({@required this.child});
-  @override
-  Widget build(BuildContext context) {
-    return Stack(children: [
-      Positioned(
-          left: 5,
-          top: 17,
-          bottom: 5,
-          right: 9,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: [
-                    0.0,
-                    1.0
-                  ],
-                      colors: [
-                    Colors.black.withOpacity(0.0),
-                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
-                  ])),
-            ),
-          )),
-      child,
-    ]);
   }
 }
