@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_website/components/cards/order.dart';
-import '../manage/orderingPizza.dart';
+import '../managers/orderingPizza.dart';
 
 Future<void> openOrderDialog(BuildContext context) async {
   return await showDialog<void>(
@@ -20,13 +20,22 @@ class _OrderDialogState extends State<OrderDialog> {
   List<Order> orders = [];
 
   void addOrder(BuildContext context) async {
-    setState(() => orders.add(Order(context)));
-    print(orders[0].dish);
+    orderFunc(
+        context,
+        (Order order) => {
+              setState(
+                () => orders.add(order),
+              )
+            },
+        () => {});
+
+    // print(orders[0].dish);
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      scrollable: true,
       title: Text('order pizza'),
       content: Column(
         mainAxisSize: MainAxisSize.min,

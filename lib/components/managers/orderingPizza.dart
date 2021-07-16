@@ -31,17 +31,22 @@ void makePizza(
 }
 
 class Order {
-  BuildContext context;
-
   Dish dish;
   int orders;
 
-  Order(this.context) {
-    showEditOrderCardDialog(context).then((response) {
-      if (response != null) {
-        orders = response["orders"];
-        dish = response["dish"];
-      } else {}
-    });
-  }
+  Order(this.dish, this.orders);
+}
+
+void orderFunc(
+  BuildContext context,
+  void onSubmit(Order order),
+  void onCancel(),
+) {
+  showEditOrderCardDialog(context).then((Order response) {
+    if (response != null) {
+      onSubmit(response);
+    } else {
+      onCancel();
+    }
+  });
 }

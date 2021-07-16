@@ -1,11 +1,11 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
 class Checkable extends StatelessWidget {
-  final bool selected;
-  final void Function(bool) onChanged;
   final Widget child;
+  final bool selected;
+  final Function(bool) onChanged;
 
   Checkable(this.child, this.selected, this.onChanged);
 
@@ -29,7 +29,7 @@ class Checkable extends StatelessWidget {
                   children: [
                     Checkbox(
                       value: selected,
-                      onChanged: (_) {},
+                      onChanged: onChanged,
                     ),
                     Text("selected"),
                   ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../manage/orderingPizza.dart';
+import '../managers/orderingPizza.dart';
 import '../dialogs/veiwYourOrder.dart';
 
 void openUserOrderedSnackbar(BuildContext context, List<Order> orders) =>

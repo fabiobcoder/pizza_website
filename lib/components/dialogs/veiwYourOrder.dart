@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../cards/order.dart';
-import '../manage/orderingPizza.dart';
+import '../managers/orderingPizza.dart';
 
 Future showVeiwYourOrderDialog(BuildContext context, List<Order> orders) {
   return showDialog(
@@ -16,20 +16,17 @@ class VeiwYourOrderDialog extends StatefulWidget {
   VeiwYourOrderDialog(this.orders);
 
   @override
-  _VeiwYourOrderDialogState createState() => _VeiwYourOrderDialogState(orders);
+  _VeiwYourOrderDialogState createState() => _VeiwYourOrderDialogState();
 }
 
 class _VeiwYourOrderDialogState extends State<VeiwYourOrderDialog> {
-  List<Order> orders;
-
-  _VeiwYourOrderDialogState(this.orders);
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      scrollable: true,
       title: Text("view your order"),
-      actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: Text("hide"))
+      actions: <Widget>[
+        TextButton(onPressed: () => Navigator.pop(context), child: Text("ok"))
       ],
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -37,8 +34,8 @@ class _VeiwYourOrderDialogState extends State<VeiwYourOrderDialog> {
           GridView.count(
             crossAxisCount: 3,
             children: List.generate(
-              orders.length,
-              (index) => OrderCard(orders[index]),
+              widget.orders.length,
+              (index) => OrderCard(widget.orders[index]),
             ),
           ),
         ],

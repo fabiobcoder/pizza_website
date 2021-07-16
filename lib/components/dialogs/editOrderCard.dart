@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:pizza_website/components/textBoxs/orders.dart';
 
-// import '../cards/dish.dart';
-// import '../manage/orderingPizza.dart';
-// import '../utils/radioWidget.dart';
+import '../managers/orderingPizza.dart';
+import '../chioces/pizzaTopping.dart';
 
-Future<Map> showEditOrderCardDialog(BuildContext context) {
+Future<Order> showEditOrderCardDialog(BuildContext context) {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController orders = TextEditingController();
@@ -14,6 +13,7 @@ Future<Map> showEditOrderCardDialog(BuildContext context) {
   return showDialog(
     context: context,
     builder: (BuildContext context) => AlertDialog(
+      scrollable: true,
       title: Text("add/edit order"),
       content: StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
@@ -22,31 +22,8 @@ Future<Map> showEditOrderCardDialog(BuildContext context) {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextFormField(
-                  validator: (input) => (input == null || input.isEmpty)
-                      ? "please enter something"
-                      : null,
-                  keyboardType: TextInputType.number,
-                  decoration: new InputDecoration(labelText: "orders"),
-                  controller: orders,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                ),
-//commented out since tis code has errors
-                /*Container( 
-                  width: 100,
-                  height: 100,
-                  child: GridView.count(
-                      crossAxisCount: 2,
-                      children: List.generate(
-                        dishes.length,
-                        (index) => RadioWidget(
-                          DishCard(dishes[index]),
-                          dishSelectedController,
-                        ),
-                      )),
-                ),*/
+                OrdersTextField(ordersController: orders),
+                PizzaChoice(),
               ],
             ),
           );
@@ -56,16 +33,20 @@ Future<Map> showEditOrderCardDialog(BuildContext context) {
         TextButton(
           child: Text("cancel"),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop(null);
           },
         ),
         TextButton(
             onPressed: () {
               if (_formKey.currentState.validate()) {
-                Navigator.of(context).pop({
-                  "orders": int.parse(orders.text.toString()),
-                  "dish": null
-                });
+                Navigator.of(context).pop(Order(
+                  Dish(
+                    "some dish name",
+                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.sNmNO-zRNa5BRrqGDUQsswHaE8%26pid%3DApi&f=1",
+                    "some description",
+                  ),
+                  int.parse(orders.text.toString()),
+                ));
               }
             },
             child: Text("done"))
