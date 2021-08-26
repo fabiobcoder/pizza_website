@@ -1,11 +1,6 @@
 name: pizza_website
 description: A new Flutter project.
 
-- name: Flutter Deployment
-  # You may pin to the exact commit or the version.
-  # uses: jeanluc243/Flutter-Deployment@1fd33eb513293af0c6cde57363d66a6a848ef6e5
-  uses: jeanluc243/Flutter-Deployment@0.1
-
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
