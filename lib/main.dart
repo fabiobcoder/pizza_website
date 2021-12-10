@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import 'components/dialogs/order.dart';
 import 'components/utils/gradientContainer.dart';
+import 'components/utils/widthLimiter.dart';
 
 void main() {
   runApp(MyApp());
@@ -63,45 +65,50 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Center(
-        child: SafeArea(
-          child: Container(
-            constraints: BoxConstraints(maxWidth: 1500),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      constraints: BoxConstraints(maxWidth: 350),
-                      child: Column(children: [
-                        Text("Teignmouth, Devon"),
-                        GradientContainer(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                              Text("fresh pizza from oven to door",
-                                  style: TextStyles.h1(context)),
-                              ElevatedButton(
-                                  child: Text("order",
-                                      style: TextStyles.actionButton(context)),
-                                  onPressed: () => openOrderDialog(context))
-                            ])),
+      body: LimitWidth(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Center(
+              // widthFactor: 100,
+              // heightFactor: 500,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                constraints: BoxConstraints(maxWidth: 350),
+                child: Column(children: [
+                  Text("Teignmouth, Devon"),
+                  GradientContainer(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
                         Text(
-                            "Fresh pizza and bread just order form teignmoth and get italian oven-cooked pizza in under 30 minutes")
-                      ]),
-                    ),
-                  ),
-                  Expanded(
-                      child: FittedBox(
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Y6Y-5Sx4WvIElp7b2iMHFwHaEK%26pid%3DApi&f=1',
-                    ),
-                    fit: BoxFit.cover,
-                  ))
+                          "fresh pizza from oven to door",
+                          style: TextStyles.h1(context),
+                        ),
+                        ElevatedButton(
+                          child: Text(
+                            "order",
+                            style: TextStyles.actionButton(context),
+                          ),
+                          onPressed: () => openOrderDialog(context),
+                        )
+                      ])),
+                  Text(
+                      "Fresh pizza and bread just order form teignmoth and get italian oven-cooked pizza in under 30 minutes")
                 ]),
-          ),
+              ),
+            ),
+            Expanded(
+              child: SizedBox(
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: CachedNetworkImage(
+                      imageUrl:
+                          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg"),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

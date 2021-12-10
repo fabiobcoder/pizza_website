@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_website/components/snackbars/userOrdered.dart';
 
-import '../dialogs/editOrderCard.dart';
+import '../dialogs/editOrder.dart';
 
 class Dish {
   String name;

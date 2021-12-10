@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// import '../cards/dish.dart';
-// import '../manage/orderingPizza.dart';
-// import '../utils/radioWidget.dart';
+import '../utils/grid.dart';
+
+import '../cards/dish.dart';
+import '../manage/orderingPizza.dart';
 
 Future<Map> showEditOrderCardDialog(BuildContext context) {
   final _formKey = GlobalKey<FormState>();
@@ -33,20 +34,15 @@ Future<Map> showEditOrderCardDialog(BuildContext context) {
                     FilteringTextInputFormatter.digitsOnly
                   ],
                 ),
-//commented out since tis code has errors
-                /*Container( 
-                  width: 100,
-                  height: 100,
-                  child: GridView.count(
-                      crossAxisCount: 2,
-                      children: List.generate(
-                        dishes.length,
-                        (index) => RadioWidget(
-                          DishCard(dishes[index]),
-                          dishSelectedController,
-                        ),
-                      )),
-                ),*/
+                MyGrid(
+                  children: List.generate(
+                    dishes.length,
+                    (index) => Card(
+                      child: DishCard(dishes[index]),
+                      //dishSelectedController,
+                    ),
+                  ),
+                ),
               ],
             ),
           );

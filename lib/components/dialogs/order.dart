@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_website/components/cards/order.dart';
+
+import '../cards/order.dart';
 import '../manage/orderingPizza.dart';
+import 'package:masonry_grid/masonry_grid.dart';
+// import '../utils/grid.dart';
 
 Future<void> openOrderDialog(BuildContext context) async {
   return await showDialog<void>(
@@ -51,15 +54,11 @@ class _OrderDialogState extends State<OrderDialog> {
             child: Text("add"),
             onPressed: choosingWhenYouGetThere ? null : () => addOrder(context),
           ),
-          Container(
-            width: 250,
-            height: 100,
-            child: GridView.count(
-              crossAxisCount: 3,
-              children: List.generate(
-                orders.length,
-                (index) => OrderCard(orders[index]),
-              ),
+          MasonryGrid(
+            column: 2,
+            children: List.generate(
+              orders.length,
+              (index) => OrderCard(orders[index]),
             ),
           ),
         ],
